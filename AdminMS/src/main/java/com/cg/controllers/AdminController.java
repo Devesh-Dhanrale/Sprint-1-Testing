@@ -1,10 +1,14 @@
 package com.cg.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,7 +29,22 @@ public class AdminController {
 	}
 	
 	@GetMapping("/getAllPolicy")
-	public List<Policy> getAllPolicy(){
+	public Map<Integer,String> getAllPolicy(){
 		return adminSer.getAllPolicy();
+	}
+	
+	@PutMapping("/updatePolicy")
+	public void updatePolicy(@RequestBody Policy p) {
+		adminSer.updatePolicy(p);
+	}
+	
+	@DeleteMapping("/removePolicy/{id}")
+	public void removePolicy(@PathVariable Integer id) {
+		adminSer.removePolicy(id);
+	}
+	
+	@GetMapping("/getPolicyDetails")
+	public List<Policy> getPolicyDetails(){
+		return adminSer.getPolicyDetails();
 	}
 }

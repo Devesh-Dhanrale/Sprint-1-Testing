@@ -11,6 +11,7 @@ public class Policy {
 	@Id
 	private Integer policyId;
 	private String policyName;
+	private String policyDescription;
 	private Integer policyDuration;
 	private Integer policyCoverage;
 	
@@ -18,10 +19,12 @@ public class Policy {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Policy(Integer policyId, String policyName, Integer policyDuration, Integer policyCoverage) {
+	public Policy(Integer policyId, String policyName, String policyDescription, Integer policyDuration,
+			Integer policyCoverage) {
 		super();
 		this.policyId = policyId;
 		this.policyName = policyName;
+		this.policyDescription = policyDescription;
 		this.policyDuration = policyDuration;
 		this.policyCoverage = policyCoverage;
 	}
@@ -42,6 +45,14 @@ public class Policy {
 		this.policyName = policyName;
 	}
 
+	public String getPolicyDescription() {
+		return policyDescription;
+	}
+
+	public void setPolicyDescription(String policyDescription) {
+		this.policyDescription = policyDescription;
+	}
+
 	public Integer getPolicyDuration() {
 		return policyDuration;
 	}
@@ -60,8 +71,8 @@ public class Policy {
 
 	@Override
 	public String toString() {
-		return "Policy [policyId=" + policyId + ", policyName=" + policyName + ", policyDuration=" + policyDuration
-				+ ", policyCoverage=" + policyCoverage + "]";
+		return "Policy [policyId=" + policyId + ", policyName=" + policyName + ", policyDescription="
+				+ policyDescription + ", policyDuration=" + policyDuration + ", policyCoverage=" + policyCoverage + "]";
 	}
-	
+
 }
