@@ -1,11 +1,16 @@
 package com.cg.controller;
 
-
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,19 +25,27 @@ import com.cg.services.PersonServicesIMP;
 public class PersonController {
 
 	@Autowired
-	RestTemplate rest;						
+	RestTemplate rest;
 
-	
 	@GetMapping("/checkEligibility")
 	public List<String> getEligibility(PersonEntity p)
 	{
 		List<String> listofpolicy = new ArrayList<String>();
-		Object[] v= rest.getForObject("http://localhost/admins/admin/getAllPolicy",Object[].class);
-		System.out.println(v);
-		for(int i=0;i<v.length;i++)
-		{
-			System.out.println(v[i]);
-		}
+//		Object[] v= rest.getForObject("http://localhost/admins/admin/getAllPolicy",Object[].class);
+//		System.out.println(v);
+//		for(int i=0;i<v.length;i++)
+//		{
+//			System.out.println(v[i]);
+//		}
+		ParameterizedTypeReference<HashMap<Integer, String>> responseType = 
+	               new ParameterizedTypeReference<HashMap<Integer, String>>() {};
+	    
+	    RequestEntity<Void> request = RequestEntity.get("http://localhost/admins/admin/getAllPolicy")
+	                       .accept(MediaType.APPLICATION_JSON).build();
+	    ResponseEntity<HashMap<Integer, String>> jsonDictionary = rest.exchange(request, responseType);
+	    
+	    System.out.println(jsonDictionary);
+	    
 		/*
 		 * String msg=null; for (String string : listofpolicy) {
 		 * 
@@ -51,9 +64,7 @@ public class PersonController {
 		return listofpolicy;
 		
 	}
-	
-	
-	
+
 	/*
 	 * @PostMapping(value="/checkEligibility",consumes =
 	 * MediaType.APPLICATION_JSON_VALUE) public List<String> insertEmp(@RequestBody
@@ -61,7 +72,6 @@ public class PersonController {
 	 * 
 	 * 
 	 * }
-	 */	
-	
-	
+	 */
+
 }
