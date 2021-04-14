@@ -11,11 +11,11 @@ public interface PersonIMP {
 	
 	public int[] checkEligibilityWithDisease(PersonEntity p);
 	
-	public void addPerson(PersonEntity p );
+	public void addPerson(PersonEntity p);
 	
 	public void removePerson(int id);
 	
-	public void listAllPerson();
+	public List<PersonEntity> listAllPerson();
 	
 	
 	
